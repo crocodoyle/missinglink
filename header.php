@@ -20,8 +20,6 @@
 		
 		<script src="js/leaflet.ajax.min.js"></script>
 		
-
-		
         <style>
 			#map{height: 500px;position:relative;}
         </style>
@@ -86,3 +84,9 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+<script>
+$('.checkbox').click(function(e) {
+    e.stopPropagation();
+});
+</script>
