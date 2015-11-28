@@ -18,6 +18,8 @@
 		<script src="js/jquery.min.js"></script>
 		<script src="js/leaflet.js"></script>
 		
+		<script src="js/leaflet.ajax.min.js"></script>
+		
 
 		
         <style>
@@ -48,10 +50,10 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-filter"></span> Type<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="commute"> Commute</input></div></label></a></li>
-            <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="work"> Work</input></div></label></a></li>
-            <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="play"> Play</input></div></label></a></li>
-            <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="other"> Other</input></div></label></a></li>
+            <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="commute" checked> Commute</input></div></label></a></li>
+            <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="work" checked> Work</input></div></label></a></li>
+            <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="play" checked> Play</input></div></label></a></li>
+            <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="other"checked> Other</input></div></label></a></li>
           </ul>
         </li>
       </ul>
@@ -59,15 +61,14 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-time"></span> Time<span class="caret"/></a>
           <ul class="dropdown-menu">
-            <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="morning"> Morning</input></div></label></a></li>
-            <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="afternoon"> Afternoon</input></div></label></a></li>
-            <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="evening"> Evening</input></div></label></a></li>
+            <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="morning" checked> Morning</input></div></label></a></li>
+            <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="afternoon" checked> Afternoon</input></div></label></a></li>
+            <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="evening" checked> Evening</input></div></label></a></li>
           </ul>
         </li>
       </ul>
+	  <button type="button" class="btn btn-default" id="test-button">TEST</button>
 
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<div style="clear:both;"></div>
-	
