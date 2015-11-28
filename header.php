@@ -25,6 +25,12 @@
         <style>
 			#map{height: 500px;position:relative;}
         </style>
+        <style type="text/css">
+        .map-panel {
+            padding-left:  10;
+			padding-right: 10;
+        }
+	</style>
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
     </head>
