@@ -39,7 +39,6 @@
 				background: white;
 				background: rgba(255,255,255,0.8);
 				box-shadow: 0 0 15px rgba(0,0,0,0.2);
-
 			}
         </style>
         <style type="text/css">
@@ -85,8 +84,9 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-time"></span> Time<span class="caret"/></a>
           <ul class="dropdown-menu">
             <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="morning" checked> Morning</input></div></label></a></li>
-           <!-- <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="afternoon" checked> Afternoon</input></div></label></a></li> -->
             <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="evening" checked> Evening</input></div></label></a></li>
+			<li role="separator" class="divider"></li>
+			<li><a href="#"><label><div class="checkbox"><input type="checkbox" id="afternoon" checked> Weekend</input></div></label></a></li>
           </ul>
         </li>
       </ul>

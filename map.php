@@ -28,19 +28,17 @@ var legend = L.control({position: 'bottomright'});
 legend.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'info legend');
 
-	div.innerHTML += '<i style="background: #FF796D"></i>&ndash; commute <br/>' 
-	div.innerHTML += '<i style="background: #5BD3D6"></i>&ndash; work<br/>'
-	div.innerHTML += '<i style="background: #E7A2D0"></i>&ndash; play<br/>'
-	div.innerHTML += '<i style="background: #FBF500"></i>&ndash; other<br/>'
-	
+	div.innerHTML = '<i style="background: #FF796D"></i>&ndash; commute<br/>' + 
+					'<i style="background: #5BD3D6"></i>&ndash; work<br/>' + 
+					'<i style="background: #E7A2D0"></i>&ndash; play<br/>' + 
+					'<i style="background: #FBF500"></i>&ndash; other<br/>';
+
     return div;
 };
 
 legend.addTo(map);
 
 </script>
-
-
 
 <script>	
 	var geojsonLayer = new L.GeoJSON.AJAX("data/reseaucyclable201511.json");       
@@ -49,33 +47,15 @@ legend.addTo(map);
 	$('input[type="checkbox"]').on("click", function( event ) {
 		var options = [];
 		
-		if($('#commute').is(':checked')){
-			options[0] = true
-		}
-		if($('#work').is(':checked')){
-			options[1] = true
-		}
-		if($('#play').is(':checked')){
-			options[2] = true
-		}
-		if($('#other').is(':checked')){
-			options[3] = true
-		}
-		if($('#morning').is(':checked')){
-			options[4] = true
-		}		
-		if($('#afternoon').is(':checked')){
-			options[5] = true
-		}		
-		if($('#evening').is(':checked')){
-			options[6] = true
-		}
-		if($('#winter').is(':checked')){
-			options[7] = true
-		}
-		if($('#good-weather').is(':checked')){
-			options[8] = true
-		}
+		options['commute'] = $('#commute').is(':checked')?"true":"false";
+		options['work'] = $('#work').is(':checked')?"true":"false";
+		options['play'] = $('#play').is(':checked')?"true":"false";
+		options['other'] = $('#other').is(':checked')?"true":"false";
+		options['morning'] = $('#morning').is(':checked')?"true":"false";
+		options['evening'] = $('#evening').is(':checked')?"true":"false";
+		options['winter'] = $('#winter').is(':checked')?"true":"false";
+		options['weekend'] = $('#weekend').is(':checked')?"true":"false";
+		options['season_other'] = $('#good-weather').is(':checked')?"true":"false";
 	
 		$.ajax({
 			type: "POST",
