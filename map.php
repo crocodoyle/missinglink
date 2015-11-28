@@ -1,5 +1,8 @@
 
 <div class="row">
+<div class="panel panel-default">
+<div class="panel-body">
+<div class="panel-body map-panel">
 <div id="map"></div>
 		<div id="log"></div>
 		<script type="text/javascript">
@@ -14,6 +17,9 @@
 			
 
 		</script>
+</div>
+</div>
+</div>
 </div>
 
 <script>	
