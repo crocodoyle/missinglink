@@ -67,7 +67,6 @@
           </ul>
         </li>
       </ul>
-	  <button type="button" class="btn btn-default" id="test-button">TEST</button>
 
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

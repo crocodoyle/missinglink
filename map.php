@@ -16,11 +16,7 @@
 		</script>
 </div>
 
-<script>
-	$( "#test-button" ).on( "click", function( event ) {
-	  $(this).html("testeddd");
-	});
-	
+<script>	
 	var geojsonLayer = new L.GeoJSON.AJAX("data/reseaucyclable201511.json");       
 	geojsonLayer.addTo(map);
 
