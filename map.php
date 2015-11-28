@@ -23,27 +23,33 @@
 	$('input[type="checkbox"]').on("click", function( event ) {
 		var options = [];
 		
-		if($('#commute').is(':checked');){
+		if($('#commute').is(':checked')){
 			options[0] = true
 		}
-		if($('#work').is(':checked');){
+		if($('#work').is(':checked')){
 			options[1] = true
 		}
-		if($('#play').is(':checked');){
+		if($('#play').is(':checked')){
 			options[2] = true
 		}
-		if($('#other').is(':checked');){
+		if($('#other').is(':checked')){
 			options[3] = true
 		}
-		if($('#morning').is(':checked');){
+		if($('#morning').is(':checked')){
 			options[4] = true
 		}		
-		if($('#evening').is(':checked');){
+		if($('#afternoon').is(':checked')){
 			options[5] = true
 		}		
-		if($('#').is(':checked');){
+		if($('#evening').is(':checked')){
 			options[6] = true
-		}		
+		}
+		if($('#winter').is(':checked')){
+			options[7] = true
+		}
+		if($('#good-weather').is(':checked')){
+			options[8] = true
+		}
 	
 		$.ajax({
 			type: "POST",
@@ -51,9 +57,10 @@
 			dataType: 'json',
 			data: {
 				'options': options,
-			}
+			},
 			success: function (response) {
 				geoJsonLayer = L.geoJson(response).addTo(map);
+			}
 		});
 		
 	});

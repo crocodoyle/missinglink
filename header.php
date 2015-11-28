@@ -62,8 +62,17 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-time"></span> Time<span class="caret"/></a>
           <ul class="dropdown-menu">
             <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="morning" checked> Morning</input></div></label></a></li>
-            <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="afternoon" checked> Afternoon</input></div></label></a></li>
+           <!-- <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="afternoon" checked> Afternoon</input></div></label></a></li> -->
             <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="evening" checked> Evening</input></div></label></a></li>
+          </ul>
+        </li>
+      </ul>
+	  <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cloud"></span> Season<span class="caret"/></a>
+          <ul class="dropdown-menu">
+            <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="winter" checked> Winter</input></div></label></a></li>
+            <li><a href="#"><label><div class="checkbox"><input type="checkbox" id="good-weather" checked> Good Weather</input></div></label></a></li>
           </ul>
         </li>
       </ul>
