@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<script src="js/papaparse.min.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/leaflet.js"></script>
+		<link href='css/leaflet.css' rel='stylesheet' />
+		<style>
+			#map{height: 500px;}
+		</style>
+	</head>
+	<body>
+	
+		<div id="map"></div>
+		<div id="log"></div>
+		<script type="text/javascript">
+			
+			var map = L.map('map').setView([45.461973, -73.920547], 13);
+			L.tileLayer('https://api.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+				attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+				maxZoom: 13,
+				id: 'mapbox.streets',
+				accessToken: 'pk.eyJ1IjoiamZyZWVkaW4iLCJhIjoiY2loNzZteHh6MGp3NHUxa2l6azhqdzBzcCJ9.dgR4BawDGcB9BJ_eo_xfnA'
+			}).addTo(map);
+			
+			
+			var jsonFile = "data0/ResoVelo/trip5000.json";
+			$.get(jsonFile, function (data) {
+				L.geoJson(data).addTo(map);
+			});
+			
+			
+			
+			/*
+			var csvfile = "support_velo_sigs.csv";
+			$.get(csvfile, function (data) {
+				var csvdata = Papa.parse(data);
+				//$('#log').append($(csvdata).data("data"));
+				$(csvdata.data).each(function(index, value){
+					//console.log(value);
+					if( index > 0 && index < 747 )
+					{
+						L.marker([value[26], value[25]]).addTo(map);
+						//$('#log').append(value[26]+'<br/>');
+					}
+				});
+				//console.log(csvdata.data);
+			});
+			*/
+		</script>
+	</body>
+</html>
