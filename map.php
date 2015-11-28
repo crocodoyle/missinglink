@@ -22,6 +22,26 @@
 </div>
 </div>
 
+<script>
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'info legend');
+
+	div.innerHTML += '<i style="background: #FF796D"></i>&ndash; commute <br/>' 
+	div.innerHTML += '<i style="background: #5BD3D6"></i>&ndash; work<br/>'
+	div.innerHTML += '<i style="background: #E7A2D0"></i>&ndash; play<br/>'
+	div.innerHTML += '<i style="background: #FBF500"></i>&ndash; other<br/>'
+	
+    return div;
+};
+
+legend.addTo(map);
+
+</script>
+
+
+
 <script>	
 	var geojsonLayer = new L.GeoJSON.AJAX("data/reseaucyclable201511.json");       
 	geojsonLayer.addTo(map);
