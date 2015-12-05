@@ -20,8 +20,6 @@
 		$first = true;
 		$strSQL = "SELECT * FROM velodata WHERE";
 		
-		$strSQL .= "(";
-		
 		// PURPOSE CATEGORIES
 		if( $purpose_commute )
 		{
@@ -47,46 +45,28 @@
 			$first = false;
 		}
 	
-		$strSQL .= ') AND (';
-		
 		//TIME OF DAY
 		$first = true;
 		if( $time_morning )
 		{
-			$strSQL .= " ( ( WEEKDAY(start) NOT IN (5,6) ) AND ( ( HOUR(start) >= 7 AND HOUR(start) <= 9 ) OR ( HOUR(stop) >= 7 AND HOUR(stop) <= 9 ) OR ( HOUR(start) < 7 AND HOUR (stop) > 9 ) ) )";
+			$strSQL .= " AND ( ( WEEKDAY(start) NOT IN (5,6) ) AND ( ( HOUR(start) >= 7 AND HOUR(start) <= 9 ) OR ( HOUR(stop) >= 7 AND HOUR(stop) <= 9 ) OR ( HOUR(start) < 7 AND HOUR (stop) > 9 ) ) )";
 			$first = false;
 		}
 		if( $time_evening )
 		{
-			if( !$first ) $strSQL .= " OR";
+			if( !$first ) $strSQL .= " OR"; else $strSQL .= " AND";
 			$strSQL .= " ( ( WEEKDAY(start) NOT IN (5,6) ) AND ( ( HOUR(start) >= 16 AND HOUR(start) <= 18 ) OR ( HOUR(stop) >= 16 AND HOUR(stop) <= 18 ) OR ( HOUR(start) < 16 AND HOUR (stop) > 18 ) ) )";
 			$first = false;
 		}
 		if( $time_weekend )
 		{
-			if( !$first ) $strSQL .= " OR";
-			$strSQL .= "  ( WEEKDAY(start) IN (5,6) )";
+			if( !$first ) $strSQL .= " OR"; else  $strSQL .= " AND";
+			$strSQL .= "  ( WEEKDAY(start) IN (0,1) )";
 			$first = false;
 		}
 		
-		$strSQL .= ') AND (';
-	
-		//SEASON
-		$first = true;
-		if( $season_winter)
-		{
-			$strSQL .= "( (MONTH(start) > 11 OR ( MONTH(start) = 11 AND DAY(start) >= 15 ) ) OR ( MONTH(start) < 4 OR ( MONTH(start) = 4 AND DAY(start) <= 15 ) ) )";
-			$first = false;
-		}
-		
-		if ( $season_other)
-		{
-			if( !$first ) $strSQL .= " OR";
-			$strSQL .= " NOT( (MONTH(start) > 11 OR ( MONTH(start) = 11 AND DAY(start) >= 15 ) ) OR ( MONTH(start) < 4 OR ( MONTH(start) = 4 AND DAY(start) <= 15 ) ) )";
-			$first = false;
-		}
-		
-		$strSQL .= ")";
+		//SEASON to add
+
 		//$strSQL = "SELECT * FROM velodata WHERE purpose = 'travail' OR purpose = 'commute'";
 		
 		$result = $db->Query( $strSQL );

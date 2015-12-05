@@ -6,91 +6,93 @@
 	$purpose_commute = isset( $_POST["commute"] )?( $_POST["commute"]=="true"?true:false ):false;
 	$purpose_workRelated = isset( $_POST["work"] )?( $_POST["work"]=="true"?true:false ):false;;
 	$purpose_play = isset( $_POST["play"] )?( $_POST["play"]=="true"?true:false ):false;;
-	$purpose_other = isset( $_POST["other"] )?( $_POST["other"]=="true"?true:false ):false;;
+	$purpose_other = isset( $_POST["other"] )?( $_POST["other"]=="true"?true:false ):true;;
 	
 	$time_morning = isset( $_POST["morning"] )?( $_POST["morning"]=="true"?true:false ):false;;
 	$time_evening = isset( $_POST["evening"] )?( $_POST["evening"]=="true"?true:false ):false;;
-	$time_weekend = isset( $_POST["weekend"] )?( $_POST["weekend"]=="true"?true:false ):false;;
+	$time_weekend = isset( $_POST["weekend"] )?( $_POST["weekend"]=="true"?true:false ):true;;
 	
 	$season_winter = isset( $_POST["winter"] )?( $_POST["winter"]=="true"?true:false ):false;;//November 15 to April 15
-	$season_other = isset( $_POST["season_other"] )?( $_POST["season_other"]=="true"?true:false ):false;;
+	$season_other = isset( $_POST["season_other"] )?( $_POST["season_other"]=="true"?true:false ):true;;
 	
-	if( ($purpose_commute || $purpose_workRelated || $purpose_play || $purpose_other) && ($time_morning || $time_evening || $time_weekend) && ($season_winter || $season_other) )
+	//if( ($`purpose`_commute || $`purpose`_workRelated || $`purpose`_play || $`purpose`_other) && ($time_morning || $time_evening || $time_weekend) && ($season_winter || $season_other) )
 	{
 		$first = true;
-		$strSQL = "SELECT * FROM velodata WHERE";
+		$strSQL = "SELECT * FROM `velodata` WHERE";
 		
-		$strSQL .= "(";
-		
-		// PURPOSE CATEGORIES
+		// `purpose` CATEGORIES
 		if( $purpose_commute )
 		{
-			$strSQL .= " purpose = 'school' OR purpose = 'domicile-travail' OR purpose = 'aller au travail' OR purpose = 'école'";
+			$strSQL .= " `purpose` = 'school' OR `purpose` = 'domicile-travail' OR `purpose` = 'aller au travail' OR `purpose` = 'école'";
 			$first = false;
 		}
 		if( $purpose_workRelated )
 		{
 			if( !$first ) $strSQL .= " OR";
-			$strSQL .= " purpose = 'work-related' OR purpose = 'déplacement-professionel' OR purpose = 'travail'";
+			$strSQL .= " `purpose` = 'work-related' OR `purpose` = 'déplacement-professionel' OR `purpose` = 'travail'";
 			$first = false;
 		}
 		if( $purpose_play )
 		{
 			if( !$first ) $strSQL .= " OR";
-			$strSQL .= " purpose = 'exercise' OR purpose = 'sport' OR purpose = 'social' OR purpose = 'loisir' OR purpose = 'leisure' OR purpose = 'shopping' OR purpose = 'magasinage' OR purpose = 'errands' OR purpose = 'courses'";
+			$strSQL .= " `purpose` = 'exercise' OR `purpose` = 'sport' OR `purpose` = 'social' OR `purpose` = 'loisir' OR `purpose` = 'leisure' OR `purpose` = 'shopping' OR `purpose` = 'magasinage' OR `purpose` = 'errands' OR `purpose` = 'courses'";
 			$first = false;
 		}
 		if( $purpose_other )
 		{
 			if( !$first ) $strSQL .= " OR";
-			$strSQL .= " purpose = 'other' OR purpose = 'autre' OR purpose = 'autres' OR purpose = 'autres motifs' OR purpose = ''";
+			$strSQL .= " `purpose` = 'other' OR `purpose` = 'autre' OR `purpose` = 'autres' OR `purpose` = 'autres motifs' OR `purpose` = ''";
 			$first = false;
 		}
-	
-		$strSQL .= ') AND (';
+		
+		$strSQL .= ' AND (';
 		
 		//TIME OF DAY
 		$first = true;
 		if( $time_morning )
 		{
-			$strSQL .= " ( ( WEEKDAY(start) NOT IN (5,6) ) AND ( ( HOUR(start) >= 7 AND HOUR(start) <= 9 ) OR ( HOUR(stop) >= 7 AND HOUR(stop) <= 9 ) OR ( HOUR(start) < 7 AND HOUR (stop) > 9 ) ) )";
+			$strSQL .= " ( ( WEEKDAY(`start`) NOT IN(5,6) ) AND ( ( HOUR(`start`) >= 7 AND HOUR(`start`) <= 9 ) OR ( HOUR(`stop`) >= 7 AND HOUR(`stop`) <= 9 ) OR ( HOUR(`start`) < 7 AND HOUR (`stop`) > 9 ) ) )";
 			$first = false;
 		}
 		if( $time_evening )
 		{
 			if( !$first ) $strSQL .= " OR";
-			$strSQL .= " ( ( WEEKDAY(start) NOT IN (5,6) ) AND ( ( HOUR(start) >= 16 AND HOUR(start) <= 18 ) OR ( HOUR(stop) >= 16 AND HOUR(stop) <= 18 ) OR ( HOUR(start) < 16 AND HOUR (stop) > 18 ) ) )";
+			$strSQL .= " ( ( WEEKDAY(`start`) NOT IN(5,6) ) AND ( ( HOUR(`start`) >= 16 AND HOUR(`start`) <= 18 ) OR ( HOUR(`stop`) >= 16 AND HOUR(`stop`) <= 18 ) OR ( HOUR(`start`) < 16 AND HOUR (`stop`) > 18 ) ) )";
 			$first = false;
 		}
 		if( $time_weekend )
 		{
 			if( !$first ) $strSQL .= " OR";
-			$strSQL .= "  ( WEEKDAY(start) IN (5,6) )";
+			$strSQL .= "  ( WEEKDAY(`start`) IN(0,1) )";
 			$first = false;
 		}
 		
 		$strSQL .= ') AND (';
-	
+		
 		//SEASON
 		$first = true;
 		if( $season_winter)
 		{
-			$strSQL .= "( (MONTH(start) > 11 OR ( MONTH(start) = 11 AND DAY(start) >= 15 ) ) OR ( MONTH(start) < 4 OR ( MONTH(start) = 4 AND DAY(start) <= 15 ) ) )";
+			$strSQL .= " ( (MONTH(`start`) > 11 OR ( MONTH(`start`) = 11 AND DAY(`start`) >= 15 ) ) OR ( MONTH(`start`) < 4 OR ( MONTH(`start`) = 4 AND DAY(`start`) <= 15 ) ) )";
 			$first = false;
 		}
 		
 		if ( $season_other)
 		{
 			if( !$first ) $strSQL .= " OR";
-			$strSQL .= " NOT( (MONTH(start) > 11 OR ( MONTH(start) = 11 AND DAY(start) >= 15 ) ) OR ( MONTH(start) < 4 OR ( MONTH(start) = 4 AND DAY(start) <= 15 ) ) )";
+			$strSQL .= " NOT( (MONTH(`start`) > 11 OR ( MONTH(`start`) = 11 AND DAY(`start`) >= 15 ) ) OR ( MONTH(`start`) < 4 OR ( MONTH(`start`) = 4 AND DAY(`start`) <= 15 ) ) )";
 			$first = false;
 		}
 		
-		$strSQL .= ")";
-		//$strSQL = "SELECT * FROM velodata WHERE purpose = 'travail' OR purpose = 'commute'";
+		$strSQL .= ')';
+		
+		//$strSQL = "SELECT * FROM velodata WHERE `purpose` = 'travail' OR `purpose` = 'commute'";
 		
 		$result = $db->Query( $strSQL );
-
+		if (!$result) {
+		  $message  = 'Invalid query: ' . mysql_error() . "\n";
+		  die($message);
+		}
 		$out = '{ "type": "FeatureCollection", "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } }, ';
 		$out.= '"features":[';
 		
@@ -140,7 +142,7 @@
 
 		echo $out;/// echo 'testload';
 	}
-	else
+	//else
 	{
 		echo "nodata";
 	}
